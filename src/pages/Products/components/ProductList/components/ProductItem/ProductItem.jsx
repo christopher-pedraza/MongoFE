@@ -40,9 +40,6 @@ function ProductItem({ productoActual, setRefresh }) {
             },
         }).then(() => {
             onOpenChange();
-            setNuevoNombre("");
-            setNuevoPrecio("");
-            setNuevaImagen("");
             setRefresh((prev) => !prev);
         });
     };
