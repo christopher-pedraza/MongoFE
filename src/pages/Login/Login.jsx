@@ -13,43 +13,46 @@ function Login({ setUser }) {
     const handleLogin = async (event) => {
         event.preventDefault();
 
-        // try {
-        // const user = loginService.login({
-        //     username,
-        //     password,
-        // });
-
-        post("user/login", { username, password })
-            .then((response) => {
-                saveToLocalStorage("loggedAppUser", JSON.stringify(response));
-                setUser(response);
-                setUsername("");
-                setPassword("");
-            })
-            .catch((error) => {
-                setErrorMessage("Credenciales erroneas");
-                setUsername("");
-                setPassword("");
-                setTimeout(() => {
-                    setErrorMessage(null);
-                }, 3000);
+        try {
+            const user = loginService.login({
+                username,
+                password,
             });
 
-        // saveToLocalStorage("loggedAppUser", JSON.stringify(user));
+            // console.log("POST: USERNAME: ", username, " PASSWORD: ", password);
+            // post("user/login", { username: username, password: password }, false)
+            //     .then((response) => {
+            //         console.log("RESPONSE: ", response);
+            //         saveToLocalStorage("loggedAppUser", JSON.stringify(response));
+            //         setUser(response);
+            //         setUsername("");
+            //         setPassword("");
+            //     })
+            //     .catch((error) => {
+            //         console.log("ERROR: ", error);
+            //         setErrorMessage("Credenciales erroneas");
+            //         setUsername("");
+            //         setPassword("");
+            //         setTimeout(() => {
+            //             setErrorMessage(null);
+            //         }, 3000);
+            //     });
 
-        // // window.localStorage.setItem("loggeAppUser", JSON.stringify(user));
+            // saveToLocalStorage("loggedAppUser", JSON.stringify(user));
 
-        // setUser(user);
-        // setUsername("");
-        // setPassword("");
-        // } catch (exception) {
-        //     setErrorMessage("Credenciales erroneas");
-        //     setUsername("");
-        //     setPassword("");
-        //     setTimeout(() => {
-        //         setErrorMessage(null);
-        //     }, 3000);
-        // }
+            window.localStorage.setItem("loggeAppUser", JSON.stringify(user));
+
+            setUser(user);
+            setUsername("");
+            setPassword("");
+        } catch (exception) {
+            setErrorMessage("Credenciales erroneas");
+            setUsername("");
+            setPassword("");
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 3000);
+        }
     };
 
     return (

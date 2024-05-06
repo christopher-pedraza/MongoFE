@@ -67,14 +67,16 @@ export default MyComponent;
 
 */
 
-export const API_URL =
-    "https://tarea2-integracion-fullstack.azurewebsites.net/api/";
+// export const API_URL =
+// "https://tarea2-integracion-fullstack.azurewebsites.net/api/";
+export const API_URL = "/api/";
 // export const API_URL = "http://localhost:3001/api/";
 
 async function apiRequest(
     method,
     url,
     data = null,
+    requiresAuth = true,
     successActions = () => {},
     errorActions = () => {}
 ) {
@@ -85,15 +87,23 @@ async function apiRequest(
             headers: {
                 "Content-Type": "application/json",
                 Accept: "*/*",
-                Authorization: `Bearer ${getFromLocalStorage("token")}`,
             },
         };
 
         if (data !== null) {
             options.data = data;
         }
+        if (requiresAuth) {
+            options.headers.Authorization = `Bearer ${getFromLocalStorage(
+                "token"
+            )}`;
+        }
+
+        console.log("API REQUEST OPTIONS: ", options);
 
         const response = await axios(options);
+
+        console.log("API RESPONSE: ", response);
 
         successActions();
         return response.data;
@@ -107,18 +117,32 @@ async function apiRequest(
  * GET
  * @param {*} url dirección a la que se hará la petición
  * @param {string} url dirección a la que se hará la petición
+ * @param {boolean} requiresAuth indica si la petición requiere autenticación
  * @param {function} successActions función que se ejecutará si la petición es exitosa
  * @param {function} errorActions función que se ejecutará si la petición falla
  * @returns la respuesta de la petición
  */
-export function get(url, successActions = () => {}, errorActions = () => {}) {
-    return apiRequest("GET", url, null, successActions, errorActions);
+export function get(
+    url,
+    requiresAuth,
+    successActions = () => {},
+    errorActions = () => {}
+) {
+    return apiRequest(
+        "GET",
+        url,
+        null,
+        requiresAuth,
+        successActions,
+        errorActions
+    );
 }
 
 /**
  * POST
  * @param {string} url dirección a la que se hará la petición
  * @param {Object} data información que se enviará en la petición
+ * @param {boolean} requiresAuth indica si la petición requiere autenticación
  * @param {function} successActions función que se ejecutará si la petición es exitosa
  * @param {function} errorActions función que se ejecutará si la petición falla
  * @returns la respuesta de la petición
@@ -126,16 +150,26 @@ export function get(url, successActions = () => {}, errorActions = () => {}) {
 export function post(
     url,
     data,
+    requiresAuth,
     successActions = () => {},
     errorActions = () => {}
 ) {
-    return apiRequest("POST", url, data, successActions, errorActions);
+    console.log("POST: url - ", url, " data - ", data);
+    return apiRequest(
+        "POST",
+        url,
+        data,
+        requiresAuth,
+        successActions,
+        errorActions
+    );
 }
 
 /**
  * PUT
  * @param {string} url dirección a la que se hará la petición
  * @param {Object} data información que se enviará en la petición
+ * @param {boolean} requiresAuth indica si la petición requiere autenticación
  * @param {function} successActions función que se ejecutará si la petición es exitosa
  * @param {function} errorActions función que se ejecutará si la petición falla
  * @returns la respuesta de la petición
@@ -143,19 +177,40 @@ export function post(
 export function put(
     url,
     data,
+    requiresAuth,
     successActions = () => {},
     errorActions = () => {}
 ) {
-    return apiRequest("PUT", url, data, successActions, errorActions);
+    return apiRequest(
+        "PUT",
+        url,
+        data,
+        requiresAuth,
+        successActions,
+        errorActions
+    );
 }
 
 /**
  * DELETE
  * @param {string} url dirección a la que se hará la petición
+ * @param {boolean} requiresAuth indica si la petición requiere autenticación
  * @param {function} successActions función que se ejecutará si la petición es exitosa
  * @param {function} errorActions función que se ejecutará si la petición falla
  * @returns la respuesta de la petición
  */
-export function del(url, successActions = () => {}, errorActions = () => {}) {
-    return apiRequest("DELETE", url, null, successActions, errorActions);
+export function del(
+    url,
+    requiresAuth,
+    successActions = () => {},
+    errorActions = () => {}
+) {
+    return apiRequest(
+        "DELETE",
+        url,
+        null,
+        requiresAuth,
+        successActions,
+        errorActions
+    );
 }

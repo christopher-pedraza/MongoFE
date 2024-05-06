@@ -14,7 +14,7 @@ function Products() {
     const [productos, setProductos] = useState([]);
 
     useEffect(() => {
-        get("productos").then((response) => {
+        get("productos", true).then((response) => {
             console.log(response);
             setProductos(response);
         });
