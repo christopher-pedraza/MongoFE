@@ -6,7 +6,10 @@ function ProductList({ productos }) {
             <div class="container px-5 py-24 mx-auto">
                 <div class="flex flex-wrap -m-4">
                     {productos.map((producto) => (
-                        <ProductItem key={producto.id} producto={producto} />
+                        <ProductItem
+                            key={producto.id}
+                            producto={producto.content}
+                        />
                     ))}
                 </div>
             </div>

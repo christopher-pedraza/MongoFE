@@ -2,6 +2,8 @@
 import { useState } from "react";
 
 import loginService from "../../services/login";
+import { saveToLocalStorage } from "../../utils/Storage";
+import { post } from "../../utils/ApiRequests";
 
 function Login({ setUser }) {
     const [username, setUsername] = useState("");
@@ -11,25 +13,43 @@ function Login({ setUser }) {
     const handleLogin = async (event) => {
         event.preventDefault();
 
-        try {
-            const user = await loginService.login({
-                username,
-                password,
+        // try {
+        // const user = loginService.login({
+        //     username,
+        //     password,
+        // });
+
+        post("user/login", { username, password })
+            .then((response) => {
+                saveToLocalStorage("loggedAppUser", JSON.stringify(response));
+                setUser(response);
+                setUsername("");
+                setPassword("");
+            })
+            .catch((error) => {
+                setErrorMessage("Credenciales erroneas");
+                setUsername("");
+                setPassword("");
+                setTimeout(() => {
+                    setErrorMessage(null);
+                }, 3000);
             });
 
-            window.localStorage.setItem("loggeAppUser", JSON.stringify(user));
+        // saveToLocalStorage("loggedAppUser", JSON.stringify(user));
 
-            setUser(user);
-            setUsername("");
-            setPassword("");
-        } catch (exception) {
-            setErrorMessage("Credenciales erroneas");
-            setUsername("");
-            setPassword("");
-            setTimeout(() => {
-                setErrorMessage(null);
-            }, 3000);
-        }
+        // // window.localStorage.setItem("loggeAppUser", JSON.stringify(user));
+
+        // setUser(user);
+        // setUsername("");
+        // setPassword("");
+        // } catch (exception) {
+        //     setErrorMessage("Credenciales erroneas");
+        //     setUsername("");
+        //     setPassword("");
+        //     setTimeout(() => {
+        //         setErrorMessage(null);
+        //     }, 3000);
+        // }
     };
 
     return (
