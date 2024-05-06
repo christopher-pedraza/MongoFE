@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 // API requests
 import { get } from "../../utils/ApiRequests";
 
+// Storage
+import { getFromLocalStorage } from "../../utils/Storage";
+
 function Products() {
     // Lista de productos con "producto", "precio" e "imagen" donde imagen es
     // una imagen placeholder de https://dummyimage.com/300x200/000/292929
@@ -25,7 +28,9 @@ function Products() {
         <div className="bg-gray-900 min-h-screen">
             <Header />
             <h1 className="text-white text-center mb-4">Productos</h1>
-            <ProductInput productos={productos} setRefresh={setRefresh} />
+            {getFromLocalStorage('rol')==='admin' ? (
+                <ProductInput productos={productos} setRefresh={setRefresh} />
+            ) : null}
             <ProductList productos={productos} setRefresh={setRefresh} />
         </div>
     );

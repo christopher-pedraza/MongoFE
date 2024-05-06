@@ -12,6 +12,7 @@ import { Input } from "@nextui-org/input";
 import { useState } from "react";
 
 import { put, del } from "../../../../../../utils/ApiRequests";
+import { getFromLocalStorage } from "../../../../../../utils/Storage";
 
 function ProductItem({ productoActual, setRefresh }) {
     const { content, id } = productoActual;
@@ -70,20 +71,23 @@ function ProductItem({ productoActual, setRefresh }) {
                 </h2>
                 <p className="mt-1">${precio}</p>
             </div>
-            <div className="mt-4">
-                <Button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onPress={onOpen}
-                >
-                    Editar
-                </Button>
-                <Button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
-                    onPress={handleDelete}
-                >
-                    Delete
-                </Button>
-            </div>
+
+            {getFromLocalStorage("rol") === "admin" ? (
+                <div className="mt-4">
+                    <Button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onPress={onOpen}
+                    >
+                        Editar
+                    </Button>
+                    <Button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
+                        onPress={handleDelete}
+                    >
+                        Delete
+                    </Button>
+                </div>
+            ) : null}
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
                 <ModalContent>
                     {(onClose) => (
