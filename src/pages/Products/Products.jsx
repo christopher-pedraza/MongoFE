@@ -1,6 +1,7 @@
 // Componentes
 import ProductList from "./components/ProductList/ProductList";
 import ProductInput from "./components/ProductInput/ProductInput";
+import Header from "./components/Header/Header";
 
 // Hooks
 import { useEffect, useState } from "react";
@@ -21,7 +22,8 @@ function Products() {
     }, [refresh]);
 
     return (
-        <div className="bg-gray-900 min-h-screen pt-8">
+        <div className="bg-gray-900 min-h-screen">
+            <Header />
             <h1 className="text-white text-center mb-4">Productos</h1>
             <ProductInput productos={productos} setRefresh={setRefresh} />
             <ProductList productos={productos} setRefresh={setRefresh} />
