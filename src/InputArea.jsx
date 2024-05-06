@@ -16,7 +16,6 @@ const InputArea = (props) => {
   };
 
   const handleItemChange = (event) => {
-    console.log(event.target.value);
     setNewItem(event.target.value);
   };
 

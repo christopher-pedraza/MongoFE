@@ -25,7 +25,6 @@ function ProductInput({ productos, setProductos }) {
     };
 
     const handleItemChange = (event) => {
-        console.log(event.target.value);
         setNewItem(event.target.value);
     };
 

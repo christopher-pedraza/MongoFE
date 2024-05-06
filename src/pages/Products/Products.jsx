@@ -15,7 +15,6 @@ function Products() {
 
     useEffect(() => {
         get("productos", true).then((response) => {
-            console.log(response);
             setProductos(response);
         });
     }, []);

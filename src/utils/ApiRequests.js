@@ -99,11 +99,7 @@ async function apiRequest(
             )}`;
         }
 
-        console.log("API REQUEST OPTIONS: ", options);
-
         const response = await axios(options);
-
-        console.log("API RESPONSE: ", response);
 
         successActions();
         return response.data;
@@ -154,7 +150,6 @@ export function post(
     successActions = () => {},
     errorActions = () => {}
 ) {
-    console.log("POST: url - ", url, " data - ", data);
     return apiRequest(
         "POST",
         url,

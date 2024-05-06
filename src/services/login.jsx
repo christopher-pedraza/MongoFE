@@ -1,6 +1,6 @@
 import axios from "axios";
 const baseUrl =
-    "http://tarea2-integracion-fullstack.azurewebsites.net/api/user";
+    "https://tarea2-integracion-fullstack.azurewebsites.net/api/user/login";
 
 const login = async (credentials) => {
     const response = await axios.post(baseUrl, credentials);
