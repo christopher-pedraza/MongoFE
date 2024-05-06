@@ -67,9 +67,9 @@ export default MyComponent;
 
 */
 
-// export const API_URL =
-//     "https://tarea2-integracion-fullstack.azurewebsites.net/api/";
-export const API_URL = "http://localhost:3001/api/";
+export const API_URL =
+    "https://tarea2-integracion-fullstack.azurewebsites.net/api/";
+// export const API_URL = "http://localhost:3001/api/";
 
 async function apiRequest(
     method,
