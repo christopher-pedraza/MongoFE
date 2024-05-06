@@ -3,7 +3,10 @@ import ProductList from "./components/ProductList/ProductList";
 import ProductInput from "./components/ProductInput/ProductInput";
 
 // Hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// API requests
+import { get } from "../../utils/ApiRequests";
 
 function Products() {
     // Lista de productos con "producto", "precio" e "imagen" donde imagen es
@@ -58,6 +61,12 @@ function Products() {
             imagen: "https://dummyimage.com/300x200/000/292929",
         },
     ]);
+
+    useEffect(() => {
+        get("products").then((response) => {
+            setProductos(response.data);
+        });
+    }, [productos]);
 
     return (
         <div>

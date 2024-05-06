@@ -65,9 +65,7 @@ export default MyComponent;
 
 */
 
-// const API_URL = "http://dreamlab-api.azurewebsites.net/";
-// export const API_URL = "http://localhost:3000/";
-export const API_URL = import.meta.env.VITE_API_URL;
+export const API_URL = 'https://tarea2-integracion-fullstack.azurewebsites.net/api/';
 
 async function apiRequest(
     method,
