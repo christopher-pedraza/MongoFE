@@ -17,13 +17,17 @@ function ProductInput({ productos, setRefresh }) {
             return;
         }
         event.preventDefault();
-        post("productos", {
-            content: {
-                producto: nombreProducto,
-                precio: precioProducto,
-                imagen: imagenProducto,
+        post(
+            "productos",
+            {
+                content: {
+                    producto: nombreProducto,
+                    precio: precioProducto,
+                    imagen: imagenProducto,
+                },
             },
-        }).then((response) => {
+            true
+        ).then((response) => {
             setRefresh((prev) => !prev);
             setNombreProducto("");
             setPrecioProducto("");

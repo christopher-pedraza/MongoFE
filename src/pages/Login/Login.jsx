@@ -10,12 +10,25 @@ function Login({ setUser }) {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
 
+    /*
+    {
+    "loggedAppUser":
+    "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2NjM4MDg3OTlhZmZhZDY4OWIzYjZhN2EiLCJpYXQiOjE3MTQ5NzgxMTZ9.-m0VIs_Lus4xo9YlbE-xAbS24DFaYFMzJqV7v1umkmo\",
+    \"username\":\"admin\",
+    \"name\":\"Superuser\",
+    \"rol\":\"root\"}"
+}
+    */
+
     const handleLogin = async (event) => {
         event.preventDefault();
         post("user/login", { username: username, password: password }, false)
             .then((response) => {
-                saveToLocalStorage("loggedAppUser", JSON.stringify(response));
-                setUser(response);
+                saveToLocalStorage("token", response.token);
+                saveToLocalStorage("username", response.username);
+                saveToLocalStorage("name", response.name);
+                saveToLocalStorage("rol", response.rol);
+                setUser(response.username);
                 setUsername("");
                 setPassword("");
             })

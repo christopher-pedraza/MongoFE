@@ -20,10 +20,9 @@ function App() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const loggedUserJSON = window.localStorage.getItem("loggedAppUser");
-        if (loggedUserJSON) {
-            const user = JSON.parse(loggedUserJSON);
-            setUser(user);
+        const username = window.localStorage.getItem("username");
+        if (username) {
+            setUser(username);
         }
     }, []);
 

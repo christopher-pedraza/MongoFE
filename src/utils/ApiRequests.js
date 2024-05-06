@@ -99,6 +99,8 @@ async function apiRequest(
             )}`;
         }
 
+        console.log(options);
+
         const response = await axios(options);
 
         successActions();
