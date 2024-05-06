@@ -43,8 +43,6 @@ function App() {
                 <Login setUser={setUser} />
             ) : (
                 <div>
-                    <p>{user.name} logged-in</p>
-                    {productsForm()}
                     <Products />
                 </div>
             )}

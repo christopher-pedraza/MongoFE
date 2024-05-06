@@ -4,28 +4,43 @@ import { useState } from "react";
 // Estilos
 import "./ProductInput.css";
 
-function ProductInput({ productos, setProductos }) {
+// API requests
+import { post } from "../../../../utils/ApiRequests";
+
+function ProductInput({ productos, setRefresh }) {
     const [nombreProducto, setNombreProducto] = useState("");
     const [precioProducto, setPrecioProducto] = useState("");
     const [imagenProducto, setImagenProducto] = useState("");
 
     const addItem = (event) => {
+        if (!nombreProducto || !precioProducto || !imagenProducto) {
+            return;
+        }
         event.preventDefault();
-        const itemObject = {
-            id: productos.length + 1,
-            producto: nombreProducto,
-            precio: precioProducto,
-            imagen:
-                imagenProducto || "https://dummyimage.com/300x200/000/292929",
-        };
-        setProductos(productos.concat(itemObject));
-        setNombreProducto("");
-        setPrecioProducto("");
-        setImagenProducto("");
-    };
+        post("productos", {
+            content: {
+                producto: nombreProducto,
+                precio: precioProducto,
+                imagen: imagenProducto,
+            },
+        }).then((response) => {
+            setRefresh((prev) => !prev);
+            setNombreProducto("");
+            setPrecioProducto("");
+            setImagenProducto("");
+        });
 
-    const handleItemChange = (event) => {
-        setNewItem(event.target.value);
+        // const itemObject = {
+        //     id: productos.length + 1,
+        //     producto: nombreProducto,
+        //     precio: precioProducto,
+        //     imagen:
+        //         imagenProducto || "https://dummyimage.com/300x200/000/292929",
+        // };
+        // setProductos(productos.concat(itemObject));
+        // setNombreProducto("");
+        // setPrecioProducto("");
+        // setImagenProducto("");
     };
 
     return (
