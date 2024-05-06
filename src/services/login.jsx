@@ -1,9 +1,10 @@
-import axios from 'axios'
-const baseUrl = 'http://localhost:3001/login'
+import axios from "axios";
+const baseUrl =
+    "https://tarea2-integracion-fullstack.azurewebsites.net/api/user/login";
 
-const login = async credentials => {
-  const response = await axios.post(baseUrl, credentials)
-  return response.data
-}
+const login = async (credentials) => {
+    const response = await axios.post(baseUrl, credentials);
+    return response.data;
+};
 
-export default { login }
+export default { login };

@@ -1,6 +1,8 @@
 // Hooks
 import { useState } from "react";
 
+import loginService from "../../services/login";
+
 function Login({ setUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -21,9 +23,6 @@ function Login({ setUser }) {
             setUsername("");
             setPassword("");
         } catch (exception) {
-            // TEMP
-            setUser({ name: "Admin" });
-
             setErrorMessage("Credenciales erroneas");
             setUsername("");
             setPassword("");
