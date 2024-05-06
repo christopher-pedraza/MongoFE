@@ -21,8 +21,8 @@ function Products() {
     }, [refresh]);
 
     return (
-        <div className="bg-gray-900 h-screen">
-            <h1 className="text-white text-center">Productos</h1>
+        <div className="bg-gray-900 min-h-screen pt-8">
+            <h1 className="text-white text-center mb-4">Productos</h1>
             <ProductInput productos={productos} setRefresh={setRefresh} />
             <ProductList productos={productos} setRefresh={setRefresh} />
         </div>
